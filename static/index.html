@@ -1,0 +1,127 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Calory Counter</title>
+    <meta charset="utf-8" />
+    <meta name="Description" content="A WebAssembly calory counting app written in rust" />
+    <meta name="keywords" content="WebAssembly, rust, C++, iPhone, Android, Mobile">
+    <meta name="author" content="Ken Williamson, Ulbora Labs LLC">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type='text/javascript' src="/libs/js/popper.js"></script>
+    <script type='text/javascript' src="/libs/js/jquery-3.5.1.min.js"></script>
+    <script type='text/javascript' src="/libs/js/bootstrap.min.js"></script>
+    <!-- <script type='text/javascript' src="/libs/js/datepicker.min.js"></script> -->
+    <script type='text/javascript' src="/js/custom.js"></script>
+
+    <link rel="stylesheet" href="/libs/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/libs/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="/libs/css/bootstrap-reboot.min.css">
+    <!-- <link rel="stylesheet" href="/libs/css/datepicker.min.css"> -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <!-- Note the usage of `type=module` here as this is an ES6 module -->
+    <script type="module">
+        // Use ES module import syntax to import functionality from the module
+        // that we have compiled.
+        //
+        // Note that the `default` import is an initialization function which
+        // will "boot" the module and make it ready to use. Currently browsers
+        // don't support natively imported WebAssembly as an ES module, but
+        // eventually the manual initialization won't be required!
+        import init, {
+            get_calories_by_day, login, user_login,
+            change_pw_screen, change_pw, register_screen, register, food_screen,
+            new_food, food_item_screen, update_food, food_calory_screen, del_food,
+            add_calory_screen, add_food_calories, add_calory_screen2, remove_food_calories
+            // add_calory_screen
+        } from './ccount.js';
+
+        async function run() {
+            // First up we need to actually load the wasm file, so we use the
+            // default export to inform it where the wasm file is located on the
+            // server, and then we wait on the returned promise to wait for the
+            // wasm to be loaded.
+            //
+            // It may look like this: `await init('./pkg/without_a_bundler_bg.wasm');`,
+            // but there is also a handy default inside `init` function, which uses
+            // `import.meta` to locate the wasm file relatively to js file.
+            //
+            // Note that instead of a string you can also pass in any of the
+            // following things:
+            //
+            // * `WebAssembly.Module`
+            //
+            // * `ArrayBuffer`
+            //
+            // * `Response`
+            //
+            // * `Promise` which returns any of the above, e.g. `fetch("./path/to/wasm")`
+            //
+            // This gives you complete control over how the module is loaded
+            // and compiled.
+            //
+            // Also note that the promise, when resolved, yields the wasm module's
+            // exports which is the same as importing the `*_bg` module in other
+            // modes
+            await init();
+            setCaloriesByDay(get_calories_by_day);
+
+            setLogin(login);
+            setLoginUser(user_login);
+            setChangePwScreen(change_pw_screen);
+            setChangePw(change_pw);
+            setRegisterScreen(register_screen);
+            setRegister(register);
+            setFoodScreen(food_screen);
+            setNewFood(new_food);
+            setFoodItemScreen(food_item_screen);
+            setFoodUpdate(update_food);
+            setAddCalories(food_calory_screen);
+            setDeleteFood(del_food);
+            setAddCaloryScreen(add_calory_screen);
+            setAddFoodCalories(add_food_calories);
+            setAddCaloryScreen2(add_calory_screen2);
+            setRemoveFoodCalories(remove_food_calories);
+
+
+
+        }
+
+        run();
+    </script>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" onclick="getCaloriesByDay()" href="#">
+            <img src="favicon.ico" width="30" height="30" alt="">
+        </a>
+
+        <ul class="nav">
+
+            <li class="nav-item">
+                <a href="#" class="nav-link" style="color: ghostwhite;" onclick="addCaloriesScreen()"
+                    role="button">Calories</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link" style="color: ghostwhite;" onclick="foodScreen()">Food</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link" style="color: ghostwhite;" onclick="loginScreen()">Login</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <div id="cont" style="margin: 5% 0 0 0;">
+
+    </div>
+
+</body>
+
+</html>
