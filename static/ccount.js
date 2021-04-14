@@ -423,28 +423,15 @@ async function init(input) {
         var ret = false;
         return ret;
     };
-    imports.wbg.__wbg_setUserEmail_eadd9608e91bf327 = function(arg0, arg1) {
-        setUserEmail(getStringFromWasm0(arg0, arg1));
-    };
-    imports.wbg.__wbg_setUserPw_89b5958eddd7c2e3 = function(arg0, arg1) {
-        setUserPw(getStringFromWasm0(arg0, arg1));
+    imports.wbg.__wbg_getUserEmail_3ae60009eb14f208 = function(arg0) {
+        var ret = getUserEmail();
+        var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        var len0 = WASM_VECTOR_LEN;
+        getInt32Memory0()[arg0 / 4 + 1] = len0;
+        getInt32Memory0()[arg0 / 4 + 0] = ptr0;
     };
     imports.wbg.__wbg_getUserPw_ebd5081e67596a99 = function(arg0) {
         var ret = getUserPw();
-        var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
-        var len0 = WASM_VECTOR_LEN;
-        getInt32Memory0()[arg0 / 4 + 1] = len0;
-        getInt32Memory0()[arg0 / 4 + 0] = ptr0;
-    };
-    imports.wbg.__wbg_getCalariesIdToRem_51c806b0954c900e = function(arg0) {
-        var ret = getCalariesIdToRem();
-        var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
-        var len0 = WASM_VECTOR_LEN;
-        getInt32Memory0()[arg0 / 4 + 1] = len0;
-        getInt32Memory0()[arg0 / 4 + 0] = ptr0;
-    };
-    imports.wbg.__wbg_getUserEmail_3ae60009eb14f208 = function(arg0) {
-        var ret = getUserEmail();
         var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         var len0 = WASM_VECTOR_LEN;
         getInt32Memory0()[arg0 / 4 + 1] = len0;
@@ -484,6 +471,20 @@ async function init(input) {
         getInt32Memory0()[arg0 / 4 + 1] = len0;
         getInt32Memory0()[arg0 / 4 + 0] = ptr0;
     };
+    imports.wbg.__wbindgen_json_serialize = function(arg0, arg1) {
+        const obj = getObject(arg1);
+        var ret = JSON.stringify(obj === undefined ? null : obj);
+        var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        var len0 = WASM_VECTOR_LEN;
+        getInt32Memory0()[arg0 / 4 + 1] = len0;
+        getInt32Memory0()[arg0 / 4 + 0] = ptr0;
+    };
+    imports.wbg.__wbg_setUserPw_89b5958eddd7c2e3 = function(arg0, arg1) {
+        setUserPw(getStringFromWasm0(arg0, arg1));
+    };
+    imports.wbg.__wbg_setUserEmail_eadd9608e91bf327 = function(arg0, arg1) {
+        setUserEmail(getStringFromWasm0(arg0, arg1));
+    };
     imports.wbg.__wbg_getCalariesIdToAdd_90361fb5f4253820 = function(arg0) {
         var ret = getCalariesIdToAdd();
         var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
@@ -491,9 +492,8 @@ async function init(input) {
         getInt32Memory0()[arg0 / 4 + 1] = len0;
         getInt32Memory0()[arg0 / 4 + 0] = ptr0;
     };
-    imports.wbg.__wbindgen_json_serialize = function(arg0, arg1) {
-        const obj = getObject(arg1);
-        var ret = JSON.stringify(obj === undefined ? null : obj);
+    imports.wbg.__wbg_getCalariesIdToRem_51c806b0954c900e = function(arg0) {
+        var ret = getCalariesIdToRem();
         var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         var len0 = WASM_VECTOR_LEN;
         getInt32Memory0()[arg0 / 4 + 1] = len0;
@@ -521,7 +521,7 @@ async function init(input) {
         var ret = getStringFromWasm0(arg0, arg1);
         return addHeapObject(ret);
     };
-    imports.wbg.__wbg_fetch_8d57c48b30738840 = function(arg0) {
+    imports.wbg.__wbg_fetch_01d048dd000bcda1 = function(arg0) {
         var ret = fetch(getObject(arg0));
         return addHeapObject(ret);
     };
@@ -768,8 +768,8 @@ async function init(input) {
         var ret = wasm.memory;
         return addHeapObject(ret);
     };
-    imports.wbg.__wbindgen_closure_wrapper852 = function(arg0, arg1, arg2) {
-        var ret = makeMutClosure(arg0, arg1, 191, __wbg_adapter_26);
+    imports.wbg.__wbindgen_closure_wrapper484 = function(arg0, arg1, arg2) {
+        var ret = makeMutClosure(arg0, arg1, 180, __wbg_adapter_26);
         return addHeapObject(ret);
     };
 
